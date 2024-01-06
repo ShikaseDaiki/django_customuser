@@ -8,12 +8,11 @@ from django.utils.translation import gettext_lazy as _
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        (_("Personal info"), {"fields": ("height", "weight")}),
+        (_("Personal info"), {"fields": ("height", "weight", "company")}),
         (
             _("Permissions"),
             {
                 "fields": (
-                    # "is_active",
                     "is_staff",
                     "is_superuser",
                     "groups",
@@ -32,8 +31,8 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-    list_display = ("email", "height", "weight", "is_staff")
-    list_filter = ("is_staff", "is_superuser", "groups")
+    list_display = ("email", "height", "weight","company", "is_staff")
+    list_filter = ("is_staff", "is_superuser", "groups", "company")
     search_fields = ("email", "email")
     ordering = ("email",)
     filter_horizontal = (
