@@ -7,6 +7,12 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import PermissionsMixin
 
 # Create your models here.
+class Company(models.Model):
+    name = models.CharField(blank=False, null=False, max_length=50)
+
+    def __str__(self):
+        return self.name
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
     
@@ -56,6 +62,7 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email_address"), unique=True)
     is_staff = models.BooleanField(_("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site."),)
+    # company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     height = models.FloatField()
     weight = models.FloatField()
