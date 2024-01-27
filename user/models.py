@@ -61,17 +61,16 @@ class UserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email_address"), unique=True)
+    username = models.CharField(_("username"), max_length=100)
     is_staff = models.BooleanField(_("staff status"), default=False, help_text=_("Designates whether the user can log into this admin site."),)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, default=1)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
-    height = models.FloatField()
-    weight = models.FloatField()
     
     objects = UserManager()
     
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["height", "weight"]
+    REQUIRED_FIELDS = ["company"]
     
     class Meta:
         verbose_name = _("user")
